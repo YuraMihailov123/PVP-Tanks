@@ -8,13 +8,14 @@ public class mapPart : Photon.MonoBehaviour
     private int hp;
     public int get;
     public PhotonView photonView;
+    public photonHandler pH;
     private Text wintext,serText;
     public GameObject winTexxt;
     // Start is called before the first frame update
     private void Start()
     {
         get = 0;
-        
+        pH = GameObject.Find("photonDontDestroy").GetComponent<photonHandler>();
         photonView = PhotonView.Get(this);
         wintext = GameObject.Find("finish.Text").GetComponent<Text>();
         Time.timeScale = 1;
@@ -42,25 +43,25 @@ public class mapPart : Photon.MonoBehaviour
                 
                 if (gameObject.tag == "flag")
                 {
-                    GameObject winText = PhotonNetwork.Instantiate(winTexxt.name, winTexxt.transform.position, Quaternion.identity,0);
+                    
                     if (gameObject.name == "gerb1")
                     {
                        
-                        winText.transform.GetChild(0).GetComponent<Text>().text = "Green Team" + " won!";
+                        winTexxt.transform.GetChild(0).GetComponent<Text>().text = "Green Team" + " won!";
                         //winText.GetComponent<Text>().text = "Green Team"+ " won!";
                     }
                     else
                     {
                         
-                        winText.transform.GetChild(0).GetComponent<Text>().text = "Red Team" + " won!";
+                        winTexxt.transform.GetChild(0).GetComponent<Text>().text = "Red Team" + " won!";
                         //winText.GetComponent<Text>().text = "Red Team" + " won!";
                     }
-                    
+                    GameObject winText = PhotonNetwork.Instantiate(winTexxt.name, winTexxt.transform.position, Quaternion.identity, 0);
                     //Time.timeScale = 0;
                 }
                 PhotonNetwork.Destroy(gameObject);
             }
-            
+            pH.DestroyBullet(collision.gameObject);
         }
     }
 

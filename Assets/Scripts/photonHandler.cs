@@ -92,6 +92,16 @@ public class photonHandler : Photon.MonoBehaviour
     //}
 
 
+    public void CreateBullet(GameObject bullet,Transform spBull)
+    {
+        PhotonNetwork.Instantiate(bullet.name, spBull.transform.position, bullet.transform.rotation, 0);
+    }
+    public void DestroyBullet(GameObject bullet)
+    {
+        PhotonNetwork.Destroy(bullet);
+    }
+
+
     private void OnDisconnectedFromPhoton()
     {
         SceneManager.sceneLoaded -= OnSceneFinishedLoading;

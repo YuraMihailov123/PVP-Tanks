@@ -206,8 +206,8 @@ public class plMove : Photon.MonoBehaviour
         {
             bullet.GetComponent<buMove>().dirX = prevDir.x;
             bullet.GetComponent<buMove>().dirY = prevDir.y;
-            PhotonNetwork.Instantiate(bullet.name,spBulls[currSpBull].transform.position, bullet.transform.rotation, 0);
-            
+            //PhotonNetwork.Instantiate(bullet.name,spBulls[currSpBull].transform.position, bullet.transform.rotation, 0);
+            pH.CreateBullet(bullet, spBulls[currSpBull]);
         }
         if (Input.GetKeyUp(KeyCode.Escape))
         {
